@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
 	public void fireWeaponA()
 	{
 		var projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
-		projectile.GetComponent<Projectile>().launch(10	0f);
+		projectile.GetComponent<Projectile>().launch(100f);
 	}
 
 	private void Start()
