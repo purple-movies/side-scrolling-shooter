@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using com.draconianmarshmallows.boilerplate.controllers;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : BasePlayerController
 {
 	private const float VERTICAL_MULTIPLIER = 10f;
 	private const float VERTICAL_OFFSET = 1f;
