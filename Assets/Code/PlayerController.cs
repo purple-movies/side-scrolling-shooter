@@ -1,4 +1,5 @@
 ﻿using com.draconianmarshmallows.boilerplate.controllers;
+using DraconianMarshmallows.Behaviours;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine;
 public class PlayerController : BasePlayerController
 {
 	private const float VERTICAL_MULTIPLIER = 10f;
-	private const float VERTICAL_OFFSET = 1f;
+	private const float VERTICAL_OFFSET     = 1f;
 
 	[SerializeField] private Rigidbody2D body;
 	[SerializeField] private GameObject projectilePrefab;
@@ -15,7 +16,7 @@ public class PlayerController : BasePlayerController
 	[SerializeField] private Transform lowerBound;
 
 	private Vector3 tempPosition;
-	private float maxYOffset; 
+	private float maxYOffset;
 	private float minYOffset;
 
 	public void moveVertically(float value)
@@ -25,17 +26,19 @@ public class PlayerController : BasePlayerController
 
 	public void fireWeaponA()
 	{
-		var projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+		var projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, 
+            Quaternion.identity);
 		projectile.GetComponent<Projectile>().launch(100f);
 	}
 
-	private void Start()
-	{
-		maxYOffset = upperBound.position.y - VERTICAL_OFFSET;
-		minYOffset = lowerBound.position.y + VERTICAL_OFFSET;
-	}
+    protected override void Start()
+    {
+        base.Start();
+        maxYOffset = upperBound.position.y - VERTICAL_OFFSET;
+        minYOffset = lowerBound.position.y + VERTICAL_OFFSET;
+    }
 
-	private void Update() 
+    private void Update() 
 	{
 		if (transform.position.y >= maxYOffset) setYClamp(maxYOffset);
 		else if (transform.position.y <= minYOffset) setYClamp(minYOffset);
